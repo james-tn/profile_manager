@@ -4,25 +4,18 @@
   <ul>
 
     <li>
-      <a href="{% url 'model_form_upload' %}">Model Form Upload</a>
+      <a href="{% url 'model_form_upload' %}">Create new profile</a>
     </li>
   </ul>
 
-  <p>Uploaded files:</p>
+  <p>Created records</p>
+ 
   <ul>
     {% for obj in documents %}
       <li>
-        <a href="{{ obj.photo }}">{{ obj.firstname }}</a>
-        <small>(Uploaded at: {{ obj.uploaded_at }})</small>
-      </li>
-    {% endfor %}
-  </ul>
-  <ul>
-    {% for obj in documents %}
-      <li>
-        <small>(First Name: {{ obj.firstname }})</small>
-        <small>(Last Name: {{ obj.lastname }})</small>
-          <img src="{{ obj.photo.url }}" >
+              <a href="{% url 'model_form_upload' %}">
+(First Name: {{ obj.firstname }})(   Last Name: {{ obj.lastname }})</a>
+          <img src="{{ obj.photo.url }}" width="200" height="150"   >
 
 
 

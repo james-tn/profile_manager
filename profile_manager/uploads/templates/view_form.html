@@ -3,12 +3,15 @@
 {% block content %}
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_table }}
+          {{form.employee_id}}
+
+    {{ form.as_p }}
 
 
     <button type="submit">Save</button>
   </form>
-<img src="data:image/png;base64,{{image_drawn}}" />
+<img src="data:image/png;base64,{{image_drawn.url}}" width="300" height="300" />
 
+  <p><a href="{% url 'home' %}">Return to home</a></p>
 
 {% endblock %}
