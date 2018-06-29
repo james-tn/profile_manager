@@ -260,3 +260,5 @@ paket-files/
 __pycache__/
 *.pyc
 /profile_manager/media/documents/AAziUtQ_GQZAdAB.jpg
+/profile_manager/media/documents
+/profile_manager/db.sqlite3

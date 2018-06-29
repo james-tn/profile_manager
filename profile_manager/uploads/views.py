@@ -38,13 +38,16 @@ def model_form_upload(request):
             image = form.cleaned_data['photo']
             image_drawn = draw_face(image.file.read())
             form.save()
-            #b64_img = base64.b64encode((image_drawn))
+            #b64_img = base64.b64encode((image_drawn.read())
+            buffered = BytesIO()
+            image_drawn.save(buffered, format="JPEG")
+            b64_img = base64.b64encode(buffered.getvalue())
+
             #mime = "image/jpg"
             #mime = mime + ";" if mime else ";"
             #input_image = "data:%sbase64,%s" % (mime, b64_img)        
-
             return render(request, 'view_form.html', {
-        'form': form, 'image_drawn':image_drawn
+        'form': form, 'image_drawn':b64_img
     })
     else:
         form = DocumentForm()
