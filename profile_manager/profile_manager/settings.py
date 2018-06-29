@@ -26,8 +26,8 @@ SECRET_KEY = 'd1a047fc-227c-44a7-80d9-ce4b35ccda68'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+# Change the URL to your specific site
+ALLOWED_HOSTS = ['profilemanagercoding.scm.azurewebsites.net']
 
 # Application definition
 
