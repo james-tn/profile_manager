@@ -8,14 +8,21 @@ from django.conf.urls import include, url
 # from django.contrib import admin
 # admin.autodiscover()
 
+from django.conf.urls import url
+from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
+
+from uploads import views
+
+
 urlpatterns = [
-    # Examples:
-    # url(r'^$', profile_manager.views.home, name='home'),
-    # url(r'^profile_manager/', include('profile_manager.profile_manager.urls')),
+    url(r'^$', views.home, name='home'),
+    url(r'^uploads/form/$', views.model_form_upload, name='model_form_upload'),
+    url(r'^edit/form/$', views.model_form_edit, name='model_form_edit'),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

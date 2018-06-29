@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_table }}
+
+
+    <button type="submit">Save</button>
+  </form>
+<img src="{{form.photo.url}}" name = 'photo'>
+<img src="{{image_drawn}}" name = 'image_drawn'>
+
+{% endblock %}
