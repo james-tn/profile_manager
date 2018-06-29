@@ -11,14 +11,13 @@ def draw_face(img):
     # Request headers
     'Content-Type': 'application/octet-stream',   # this should be the content type
     'Ocp-Apim-Subscription-Key': subscription_key,
-}
+    }
 
 
  
     response = requests.post(BASE_URL,  headers=headers, data=img)
         
     faces = response.json()
-    print(faces)
     def getRectangle(faceDictionary):
         rect = faceDictionary['faceRectangle']
         left = rect['left']
@@ -35,7 +34,7 @@ def draw_face(img):
     for face in faces:
         draw.rectangle(getRectangle(face), outline='red')
 
-    return output_image
+    return len(faces),output_image
 
 
 #image_path = "path_to_image"

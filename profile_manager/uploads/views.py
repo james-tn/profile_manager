@@ -10,6 +10,7 @@ from uploads.forms import DocumentForm
 from uploads.faceDetector import draw_face
 from io import BytesIO
 from PIL import Image
+from django.core.files.base import ContentFile
 
 
 def home(request):
@@ -17,37 +18,28 @@ def home(request):
     return render(request, 'home.html', { 'documents': documents })
 
 
-def simple_upload(request):
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        uploaded_file_url = fs.url(filename)
-        return render(request, 'simple_upload.html', {
-            'uploaded_file_url': uploaded_file_url
-        })
-    return render(request, 'simple_upload.html')
 
 
-def model_form_upload(request):
+
+def create_profile(request):
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
 
 
         if form.is_valid():
-            image = form.cleaned_data['photo']
-            image_drawn = draw_face(image.file.read())
-            form.save()
-            #b64_img = base64.b64encode((image_drawn.read())
-            buffered = BytesIO()
-            image_drawn.save(buffered, format="JPEG")
-            b64_img = base64.b64encode(buffered.getvalue())
+            origin_image, drawn_image = form.cleaned_data['photo']
+            record = Document()
+            record.department = form.cleaned_data['department']
+            record.firstname = form.cleaned_data['firstname']
+            record.lastname = form.cleaned_data['lastname']
+            record.photo = origin_image.read()
 
-            #mime = "image/jpg"
-            #mime = mime + ";" if mime else ";"
-            #input_image = "data:%sbase64,%s" % (mime, b64_img)        
+            record.save()
+
+
+
             return render(request, 'view_form.html', {
-        'form': form, 'image_drawn':b64_img
+        'form': form, 'image_drawn':drawn_image
     })
     else:
         form = DocumentForm()
