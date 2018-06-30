@@ -5,7 +5,7 @@ from uploads.faceDetector import draw_face
 from io import BytesIO
 from PIL import Image
 import base64
-
+from django.core.exceptions import ValidationError
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
@@ -17,31 +17,20 @@ class DocumentForm(forms.ModelForm):
     def clean_photo(self):
 
         image = self.cleaned_data['photo']
-        im = Image.open(image)
+        im = image.open(image)
 
-        print("before calling")
-        buffered1 = BytesIO()
-        im.save(buffered1, format="JPEG")
-        face_no, image_drawn = draw_face(buffered1.getvalue())
-        print("Face number is: ", face_no)
+        face_no, image_drawn = draw_face(image.file.read())
 
-        #face_no, image_drawn = draw_face(image.file.read())
-        #b64_img = base64.b64encode((image_drawn.read())
-        buffered2 = BytesIO()
-        image_drawn.save(buffered2, format="JPEG")
 
-        b64_img = base64.b64encode(buffered2.getvalue())
-
-        buffered3= BytesIO()
-        image_drawn.save(buffered3, format="JPEG")
 
         
-        #Check date is not in past. 
         if face_no ==0:
-            raise ValidationError(_('No face detected, please choose another image'))
+            raise ValidationError(('no face detected, please choose another image'))
+        if face_no >1:
+            raise ValidationError(('More than one person detected, please choose another image'))
 
 
-        return (buffered3, b64_img)
+        return (image, image_drawn)
 
 
         

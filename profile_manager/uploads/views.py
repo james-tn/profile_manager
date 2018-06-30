@@ -27,19 +27,31 @@ def create_profile(request):
 
 
         if form.is_valid():
-            origin_image, drawn_image = form.cleaned_data['photo']
+            origin_image, image_drawn = form.cleaned_data['photo']
+    #def clean_photo(self):
             record = Document()
-            record.department = form.cleaned_data['department']
-            record.firstname = form.cleaned_data['firstname']
-            record.lastname = form.cleaned_data['lastname']
-            record.photo = origin_image.read()
+            record.photo=origin_image
+            record.firstname=form.cleaned_data['firstname']
+            record.lastname=form.cleaned_data['lastname']
+            record.department=form.cleaned_data['department']
 
             record.save()
+
+            buffered = BytesIO()
+
+
+        #face_no, image_drawn = draw_face(image.file.read())
+
+            image_drawn.save(buffered, format="JPEG")
+            b64_img = base64.b64encode((buffered.getvalue()))
+
+        
+        #Check date is not in past. 
 
 
 
             return render(request, 'view_form.html', {
-        'form': form, 'image_drawn':drawn_image
+        'form': form, 'image_drawn':b64_img
     })
     else:
         form = DocumentForm()
