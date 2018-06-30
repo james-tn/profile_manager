@@ -259,6 +259,11 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
-/profile_manager/media/documents/AAziUtQ_GQZAdAB.jpg
-/profile_manager/media/documents
+/profile_manager/media
 /profile_manager/db.sqlite3
+/profile_manager/env
+/profile_manager/env2
+/profile_manager/obj
+/profile_manager/static
+
+

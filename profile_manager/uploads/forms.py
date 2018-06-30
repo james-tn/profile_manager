@@ -15,7 +15,7 @@ class DocumentForm(forms.ModelForm):
     }
 
     def clean_photo(self):
-
+        image_validator=1
         image = self.cleaned_data['photo']
         im = image.open(image)
 
@@ -25,12 +25,11 @@ class DocumentForm(forms.ModelForm):
 
         
         if face_no ==0:
-            raise ValidationError(('no face detected, please choose another image'))
+            image_validator=0
         if face_no >1:
-            raise ValidationError(('More than one person detected, please choose another image'))
+            image_validator=2
 
-
-        return (image, image_drawn)
+        return (image_validator, image, image_drawn)
 
 
         

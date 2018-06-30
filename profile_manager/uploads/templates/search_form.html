@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <form method="get" action="search_form">
+    {% csrf_token %}
+    {{form.employee_id}}
+    {{ form.as_p }}
+
+    <button type="submit">Retrieve profile</button>
+  </form>
+
+  <p><a href="{% url 'home' %}">Return to home</a></p>
+{% endblock %}

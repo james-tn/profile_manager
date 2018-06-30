@@ -48,6 +48,9 @@
     <Compile Include="uploads\__init__.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="uploads\templates\search_form.html" />
+    <Content Include="uploads\templates\update_form.html" />
+    <Content Include="uploads\templates\search_result_form.html" />
     <Content Include="web.config" />
     <None Include="profilemanagercoding - Web Deploy.pubxml" />
     <Content Include="requirements.txt" />

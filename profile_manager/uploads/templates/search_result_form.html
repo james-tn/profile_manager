@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <form method="post" enctype="multipart/form-data" action="model_form_upload">
+    {% csrf_token %}
+      <p><label for="firstname">Employee ID:</label>
+            {{employee_id}}
+</p>
+
+
+    {{ form.as_p }}
+
+
+    <button type="submit">Update profile</button>
+  </form>
+
+<img src="data:image/png;base64,{{image_drawn}}" width="500" height="450" />
+
+  <p><a href="{% url 'home' %}">Return to home</a></p>
+
+{% endblock %}
