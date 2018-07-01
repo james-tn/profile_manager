@@ -7,7 +7,7 @@
       <a href="{% url 'model_form_upload' %}">Create new profile</a>
     </li>
       <li>
-      <a href="{% url 'search_form' %}?pk=">Search/update profile</a>
+      <a href="{% url 'search_form' %}?employee_id=">Search/update profile</a>
     </li>
   </ul>
 
@@ -17,7 +17,7 @@
     {% for obj in documents %}
       <li>
              
-{{ obj.firstname }}    {{ obj.lastname }}
+{{ obj.employee_id }} {{ obj.firstname }}    {{ obj.lastname }}
           <img src="{{ obj.photo.url }}" width="150" height="100"   >
 
 

@@ -1,18 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <form method="post" enctype="multipart/form-data" action="model_form_upload">
+  <form method="post" enctype="multipart/form-data" action="/update/form/">
     {% csrf_token %}
-      <p><label for="firstname">Employee ID:</label>
-            {{employee_id}}
-</p>
 
 
-    {{ form.as_p }}
+
+
+ <p><label for="id_employee_id">Employee ID:</label> <input type="text" readonly name="employee_id" value="{{employee_id}}" maxlength="10" id="id_employee_id" /></p>
+
+ <p><label for="id_firstname">First Name:</label> <input type="text" name="firstname" value="{{firstname}}" maxlength="255" id="id_firstname" /></p>
+
+<p><label for="id_lastname">Last Name:</label> <input type="text" name="lastname" value="{{lastname}}" maxlength="255" id="id_lastname" /></p>
+
+<p><label for="id_department">Department:</label> <input type="text" name="department" value="{{department}}" maxlength="255" id="id_department" /></p>
 
 
     <button type="submit">Update profile</button>
+<p><label for="id_photo">Change photo:</label> <input type="file" name="photo"  id="id_photo" /></p>
+
   </form>
+
 
 <img src="data:image/png;base64,{{image_drawn}}" width="500" height="450" />
 

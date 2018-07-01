@@ -18,6 +18,8 @@ from uploads import views
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
+    url(r'^update/form/$', views.update_profile, name='update_profile'),
+
     url(r'^uploads/form/$', views.create_profile, name='model_form_upload'),
     url(r'^search/form/$', views.search_profile, name='search_form'),
 
