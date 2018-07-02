@@ -1,3 +1,5 @@
+#This module is to process a picture and draw rectangle for each identified face.
+
 def draw_face(img):
     import requests
     from io import BytesIO
@@ -37,12 +39,5 @@ def draw_face(img):
     return len(faces),output_image
 
 
-#image_path = "path_to_image"
-
-# Read the image into a byte array
-#image_data = open(image_path, "rb").read()
-
-#image = draw_face(image_data)
-#image.show()
 
 

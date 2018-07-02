@@ -1,6 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
@@ -56,7 +55,7 @@ def update_profile(request):
 
     else:
         form = DocumentForm()
-    return render(request, 'model_form_upload.html', {
+    return render(request, 'create_form.html', {
         'form': form
     })
 
@@ -99,7 +98,7 @@ def create_profile(request):
 
     else:
         form = DocumentForm()
-    return render(request, 'model_form_upload.html', {
+    return render(request, 'create_form.html', {
         'form': form
     })
 def search_profile(request):
@@ -108,8 +107,12 @@ def search_profile(request):
     employee_id = request.GET['employee_id']
     if (employee_id!=""):
         print("employee id is", employee_id)
-        print(request.method)
-        doc = Document.objects.get(employee_id=employee_id)
+        try:
+            doc = Document.objects.get(employee_id=employee_id)
+        except:
+            return render(request, 'search_form.html', {'error_employee_id':employee_id})
+
+
         firstname = doc.firstname
         lastname = doc.lastname
         department = doc.department
@@ -132,7 +135,6 @@ def search_profile(request):
 })
 
     else:
-        print("overhear")
         return render(request, 'search_form.html')
 
 

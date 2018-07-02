@@ -1,28 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h3>Menu</h3>
   <ul>
 
     <li>
-      <a href="{% url 'model_form_upload' %}">Create new profile</a>
+      <a href="{% url 'create_form' %}">Create new profile</a>
     </li>
       <li>
       <a href="{% url 'search_form' %}?employee_id=">Search/update profile</a>
     </li>
   </ul>
 
-  <p>Created records</p>
+  <h3>Created records</h3>
  
-  <ul>
+<table>
+  <tr>
+    <th>ID </th>
+    <th>  First Name</th> 
+    <th>  Last Name</th>
+    <th>  Profile Picture</th>
+
+  </tr>
+
+
+
+
     {% for obj in documents %}
-      <li>
+      <tr>
              
-{{ obj.employee_id }} {{ obj.firstname }}    {{ obj.lastname }}
-          <img src="{{ obj.photo.url }}" width="150" height="100"   >
+<td>{{ obj.employee_id }} </td>
+          
+        <td>{{ obj.firstname }}   </td>  
+         <td>{{ obj.lastname }}</td> 
+         <td><img src="{{ obj.photo.url }}" width="150" height="100"   ></td> 
 
 
 
-      </li>
+      </tr>
     {% endfor %}
-  </ul>
+</table>
+
 {% endblock %}

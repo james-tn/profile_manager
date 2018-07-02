@@ -4,8 +4,10 @@
 
   <form method="get" action="">
     {% csrf_token %}
-      Employee ID: <input type="text" name="employee_id">	
-
+      Employee ID: <input type="text" name="employee_id" value="{{error_employee_id}}">	
+      {% if error_employee_id %}
+     <p> Employee ID {{error_employee_id}} does not exist! try another id </p>
+      {%endif%}
 
     <button type="submit">Retrieve profile</button>
   </form>
