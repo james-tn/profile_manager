@@ -44,7 +44,7 @@ def photo_verify(img1, img2):
     from PIL import Image, ImageDraw
     #Convert width height to a point in a rectangle
 
-    subscription_key = '7532d57c84d447a9adf222de78fe71a3'  # Replace with a valid subscription key (keeping the quotes in place).
+    subscription_key = 'key'  # Replace with a valid subscription key (keeping the quotes in place).
 
     DETECT_URL = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect'  # Replace with your regional Base URL
     VERIFY_URL = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/verify'  # Replace with your regional Base URL
