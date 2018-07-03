@@ -20,8 +20,10 @@ urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^update/form/$', views.update_profile, name='update_profile'),
 
-    url(r'^uploads/form/$', views.create_profile, name='model_form_upload'),
+    url(r'^uploads/form/$', views.create_profile, name='create_form'),
     url(r'^search/form/$', views.search_profile, name='search_form'),
+    url(r'^search_verify/form/$', views.search_for_verification, name='search_for_verification_form'),
+    url(r'^verify/form/$', views.verify, name='verify'),
 
 
     url(r'^admin/', admin.site.urls),

@@ -7,6 +7,8 @@ import base64
 from uploads.models import Document
 from uploads.forms import DocumentForm
 from uploads.faceDetector import draw_face
+from uploads.faceDetector import photo_verify
+
 from io import BytesIO
 from PIL import Image
 from django.shortcuts import get_object_or_404
@@ -136,5 +138,74 @@ def search_profile(request):
 
     else:
         return render(request, 'search_form.html')
+
+def search_for_verification(request):
+    
+
+    employee_id = request.GET['employee_id']
+    if (employee_id!=""):
+        print("employee id is", employee_id)
+        try:
+            doc = Document.objects.get(employee_id=employee_id)
+        except:
+            return render(request, 'search_for_verification_form.html', {'error_employee_id':employee_id})
+
+
+        firstname = doc.firstname
+        lastname = doc.lastname
+        department = doc.department
+        id = doc.employee_id
+        image = doc.photo
+        _, image_drawn = draw_face(image.file.read())
+
+        buffered = BytesIO()
+
+
+
+        image_drawn.save(buffered, format="JPEG")
+        b64_img = base64.b64encode((buffered.getvalue()))
+
+
+
+
+        return render(request, 'verification_form.html', {
+    'image1':b64_img, 'employee_id': doc.employee_id, 'firstname': firstname, 'lastname': lastname, 'department': department
+})
+
+    else:
+        return render(request, 'search_for_verification_form.html')
+
+def verify(request):
+        employee_id = request.POST['employee_id']
+        new_photo = request.FILES['photo']
+        print("employee id is", employee_id)
+        doc = Document.objects.get(employee_id=employee_id)
+
+
+        firstname = doc.firstname
+        lastname = doc.lastname
+        department = doc.department
+        image = doc.photo
+        match, image_on_file, new_photo_drawn = photo_verify(image.file.read(), new_photo.file.read())
+        print("Match:", match)
+        buffered1 = BytesIO()
+        buffered2 = BytesIO()
+
+        image_on_file.save(buffered1, format="JPEG")
+        new_photo_drawn.save(buffered2, format="JPEG")
+
+        b64_img1 = base64.b64encode((buffered1.getvalue()))
+        b64_img2 = base64.b64encode((buffered2.getvalue()))
+
+
+
+
+        return render(request, 'verification_form.html', {
+    'image1':b64_img1,'image2':b64_img2, 'employee_id': employee_id, 'firstname': firstname, 'lastname': lastname, 'department': department, 'match':match
+})
+
+
+        
+
 
 

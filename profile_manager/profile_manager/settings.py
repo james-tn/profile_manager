@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'uploads'
+    'uploads',
+    'storages'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -79,12 +80,23 @@ WSGI_APPLICATION = 'profile_manager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'demodb',
+        'ENGINE': 'sql_server.pyodbc',
+        'HOST': 'msdemosql001.database.windows.net',
+        'USER': 'james',
+        'PASSWORD': 'Godblessme@2018',
     }
 }
+
 
 
 # Password validation
@@ -131,3 +143,9 @@ STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+AZURE_ACCOUNT_NAME = "storageacc001"
+AZURE_ACCOUNT_KEY ='7TUya1wYNKZG7E0BZrEAlL6cgiWnKTDdGI3JG1zATuHHAQFyuN4J+geYIB1SJYTCtKmLH1+5I1/ICCH1LeZAnQ=='
+AZURE_CONTAINER ='profilemanager'
+
+
