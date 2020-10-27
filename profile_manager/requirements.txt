@@ -79,7 +79,7 @@ certifi==2018.4.16
 cffi==1.11.5
 chardet==3.0.4
 cognitive-face==1.4.1
-cryptography==2.2.2
+cryptography==3.2
 Django==1.11.13
 django-pyodbc-azure==1.11.13.1
 django-storages==1.6.6
